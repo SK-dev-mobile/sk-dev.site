@@ -67,6 +67,10 @@ body {
     flex-shrink: 0;
 }
 
+.container-nav .headline_title {
+    display: none;
+}
+
 .container-nav {
     display: flex;
     height: 80px;
@@ -148,23 +152,25 @@ body {
 header {
     display: flex;
     justify-content: center;
-    height: calc(100vh - 80px);
+    width: 100%;
+    min-height: calc(100vh - 80px);
 }
 
 .header_with_image {
     display: flex;
+    width: 100%;
     flex-direction: row;
-    gap: 10vw;
+    gap: 30px;
     justify-content: space-between;
-    flex-shrink: 1;
-    padding: 0 10vw;
+    align-content: space-between;
+    padding: 0 15vw;
 }
 
 .header_text_column {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 10vh;
+    justify-content: space-evenly;
+    gap: 30px;
     width: 30vw;
 }
 
@@ -187,19 +193,58 @@ header {
 
 .header_image_container {
     display: flex;
-    justify-content: space-around;
-    width: 40vw;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
 }
 
 .header_image {
     flex: 1;
+    flex-shrink: 0;
     background-color: var(--background);
     background-repeat: no-repeat;
     background-image: url("../assets/images/website/phone_header_desktop.png");
     background-size: contain;
-    background-position: center;
-    width: auto;
-    height: auto;
+    background-position: right;
+    height: 100%;
+    width: 100%;
+}
+
+/* ICON BLOCK ------------------------------------------------------- */
+
+#features_list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: flex-start;
+}
+
+.icon_block {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.icon_block svg {
+    height: 64px;
+    width: 64px;
+    flex-shrink: 0;
+    fill: var(--secondary);
+    padding: 10px;
+    background-color: var(--primary);
+    border-radius: 32px;
+}
+
+.icon_block svg path {
+    fill: var(--secondary);
+}
+
+.icon_block span {
+    font-size: large;
+    font-weight: 400;
+    color: var(--primary);;
 }
 
 
@@ -262,6 +307,7 @@ footer {
         align-content: start;
         align-items: flex-start;
         padding: 20px;
+        gap: 20px;
     }
 
     #request-project-button {
@@ -274,29 +320,41 @@ footer {
 
     .navbar-collapse .navbar-nav {
         display: none;
+        flex: 1;
         transition: all 0.3s ease-in;
         flex-direction: column;
-        padding-top: 30px;
+        align-content: start;
+        align-items: start;
     }
-
 
     .header_with_image {
         flex-direction: column;
         justify-content: space-between;
         padding: 0;
+        gap: 0;
     }
 
     .header_text_column {
         flex: 1;
+        justify-content: space-between;
         width: auto;
         gap: 30px;
-        padding: 20px 20px 0 20px;
+        padding: 20px;
+    }
+    
+    .header_text_column .headline_title {
+        display: none;
+    }
+
+    .navbar-brand {
+        display: none;
     }
 
     .headline_title {
         font-size: xx-large;
-        color: var(--primary);
-        text-align: center;
+        font-weight: 600;
+        color: var(--secondary);
+        text-align: start;
     }
 
     .headline_subtitle {
@@ -312,6 +370,38 @@ footer {
     .header_image {
         background-image: url("../assets/images/website/phone_header_mobile.png");
         background-position: bottom;
+    }
+
+    .container-nav .headline_title {
+        display: block;
+    }
+
+    #features_list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    .icon_block {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .icon_block svg {
+        fill: var(--primary);
+        background-color: unset;
+    }
+
+    .icon_block span {
+        font-size: small;
+    }
+
+    .icon_block svg path{
+        fill: var(--primary);
     }
 
     .section-text {
