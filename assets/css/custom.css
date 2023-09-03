@@ -195,7 +195,7 @@ header {
     flex: 1;
     background-color: var(--background);
     background-repeat: no-repeat;
-    background-image: url("/assets/images/website/phone_header_desktop.png");
+    background-image: url("../images/website/phone_header_desktop.png");
     background-size: contain;
     background-position: center;
     width: auto;
@@ -310,7 +310,7 @@ footer {
     }
 
     .header_image {
-        background-image: url("/assets/images/website/phone_header_mobile.png");
+        background-image: url("../images/website/phone_header_mobile.png");
         background-position: bottom;
     }
 
