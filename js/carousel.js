@@ -1,10 +1,12 @@
 
 window.addEventListener('load', initCarousel, false)
 
+
 function initCarousel() {
     const cardsContainer = document.querySelector(".card-carousel");
     const cardsController = document.querySelector(".card-carousel + .card-controller")
     const spacing = 3
+    const width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 
     class DraggingEvent {
         constructor(target = undefined) {
@@ -338,7 +340,7 @@ function initCarousel() {
 
             if (data != null) {
                 this.container.classList.remove("smooth-return")
-                xDist = data.x / 300; // speed 
+                xDist = data.x / ((width < 660) ? 150 : 300); // speed
             } else {
 
 

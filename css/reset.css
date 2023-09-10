@@ -91,3 +91,7 @@ legend {
 a, button {
     -webkit-tap-highlight-color: transparent;
 }
+
+* {
+    background-repeat: no-repeat;
+}

@@ -2,8 +2,6 @@
 /* SETUP FONTS */
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600;800&display=swap');
 
-@import "carousel.css";
-
 /* SETUP COLORS */
 :root{
     --background: #F0F0F0;
@@ -11,8 +9,23 @@
     --primary: #005DFF;
     --secondary: #FCFCFC;
     --accent: #FFDA16;
+    --accent-2: #F5583B;
+
+    --button-bg-hover: var(--secondary);
+    --button-fg-hover: var(--primary);
+    --button-bg: var(--primary);
+    --button-fg: var(--secondary);
+
+
+    --background-dark: #0a0a0a;
+    --display-dark: #eeeeee;
+    --primary-dark: #1482ff;
+    --secondary-dark: #1a1a1a;
+    --accent-dark: #ffde5c;
+    --accent-2-dark: #f35c40;
 
     --corner-radius: 15px;
+    --corner-radius-inv: -15px;
     --corner-radius-small: 8px;
 }
 
@@ -115,63 +128,78 @@ body {
 
     border-radius: var(--corner-radius);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    background-color: var(--primary);
-    color: var(--secondary);
-
+    background-color: var(--button-bg);
+    color: var(--button-fg);
+    font-weight: 600;
     transition: all 0.2s ease-in;
 }
 
 .btn svg path {
-    fill: var(--secondary);
+    fill: var(--button-fg);
 }
 
 .btn svg {
     width: 18px;
 }
 
+#calc-button {
+    border-radius: 999px;
+    padding: 40px;
+}
+
+#calc-button svg {
+    aspect-ratio: 1;
+    width: 120px;
+}
+
+
 #carousel-button-prev .btn, #carousel-button-next .btn {
     border-radius: var(--corner-radius-small);
     padding: 10px 10px;
 }
 
+@media (hover: none) {
+    .btn:active {
+        background-color: var(--button-bg-hover);
+        color: var(--button-fg-hover);
+
+        transition: all 50ms ease-in;
+    }
+
+    .btn:active svg path {
+        fill: var(--button-fg-hover);
+        transition: all 50ms ease-in;
+    }
+}
+
 @media (hover: hover) {
     .btn:hover {
         box-shadow: 0 2px 10px 10px rgba(45, 112, 227, 0.30);
-        background-color: var(--secondary);
-        color: var(--primary);
-        transition: all 0.2s ease-out;
+        background-color: var(--button-bg-hover);
+        color: var(--button-fg-hover);
+        transition: all 0.2s ease-in;
+
+        transform: scale(1.05);
     }
 
     .btn:active {
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-        background-color: var(--primary);
-        color: var(--secondary);
+        background-color: var(--button-bg);
+        color: var(--button-fg);
 
-        transition: all 0.2s ease-in;
+        transition: all 0.1s ease-out;
+        transform: scale(1);
+
     }
 
     .btn:hover svg path {
-        fill: var(--primary);
-        transition: all 0.2s ease-out;
-    }
-
-    .btn:active svg path {
-        fill: var(--secondary);
+        fill: var(--button-fg-hover);
         transition: all 0.2s ease-in;
     }
-}
-
-@media (hover: none) {
-    .btn:active {
-        background-color: var(--secondary);
-        color: var(--primary);
-
-        transition: all 50ms ease-in;
-    }
 
     .btn:active svg path {
-        fill: var(--primary);
-        transition: all 50ms ease-in;
+        fill: var(--button-bg-hover);
+        transition: all 0.1s ease-out;
     }
 }
 
@@ -188,6 +216,18 @@ header {
     justify-content: center;
     width: 100%;
     min-height: calc(100vh - 80px);
+    background-image: url("../assets/images/website/back.png");
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-back {
+    position: absolute;
+    z-index: -1;
 }
 
 .header_with_image {
@@ -233,15 +273,51 @@ header {
 }
 
 .header_image {
+    display: none;
     flex: 1;
     flex-shrink: 0;
     background-color: var(--background);
     background-repeat: no-repeat;
-    background-image: url("../assets/images/website/phone_header_desktop.png");
+    background-image: url("../assets/images/website/phone_static.png");
     background-size: contain;
     background-position: right;
     height: 100%;
     width: 100%;
+}
+
+.phone-header-image {
+    display: none;
+}
+
+.desktop-header-image {
+    filter: drop-shadow(-5px 10px 10px rgba(0, 0, 0, 0.25));
+    transition: all .2s ease-out;
+}
+
+.desktop-header-image:hover {
+    filter: drop-shadow(-10px 15px 15px rgba(0, 0, 0, 0.15));
+    transform: scale(1.2);
+    transition: all .3s ease-in-out;
+}
+
+/*.header_image:hover {*/
+/*    background-image: url("../assets/images/website/phone_header_desktop.png");*/
+
+/*    transition: all .3s ease-in-out;*/
+/*}*/
+
+/* ANIMATIONS ------------------------------------------------------ */
+
+.animate-appear {
+    animation-duration: 0.5s;
+    animation-name: animate-scale-appear;
+    animation-delay: 0.5s;
+    animation-fill-mode: backwards;
+}
+
+@keyframes animate-scale-appear {
+    0% { scale: 0; }
+    100% { scale: 1; }
 }
 
 /* ICON BLOCK ------------------------------------------------------- */
@@ -267,8 +343,13 @@ header {
     flex-shrink: 0;
     fill: var(--secondary);
     padding: 10px;
-    background-color: var(--primary);
-    border-radius: 32px;
+    background-color: #F5583B;
+    border-radius: var(--corner-radius);
+}
+
+.icon_block:hover svg {
+    transform: rotate(360deg);
+    transition: all 0.4s ease-in-out;
 }
 
 .icon_block svg path {
@@ -278,7 +359,7 @@ header {
 .icon_block span {
     font-size: large;
     font-weight: 400;
-    color: var(--primary);;
+    color: var(--display);;
 }
 
 
@@ -287,13 +368,47 @@ header {
 section {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap:    30px;
     justify-content: flex-start;
     padding: 30px 0;
 }
 
+.section-row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between;
+    align-content: space-between;
+    /*align-items: center;*/
+    padding: 30px 10vw;
+    align-items: stretch;
+}
+
 .section-even {
-    background: var(--background);
+    /*background: var(--background-dark);*/
+    /*--background: var(--background-dark);*/
+    /*--display: var(--display-dark);*/
+    /*--primary: var(--primary-dark);*/
+    /*--secondary: var(--secondary-dark);*/
+    /*--accent: var(--accent-dark);*/
+    /*--accent-2: var(--accent-2-dark);*/
+
+    /*--button-bg-hover: var(--display-dark);*/
+    /*--button-fg-hover: var(--primary-dark);*/
+    /*--button-bg: var(--primary-dark);*/
+    /*--button-fg: var(--display-dark);*/
+
+    /*color: var(--display-dark)*/
+}
+
+.section-non-even {
+    background-image: url("../assets/images/website/back.png");
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .section-text {
@@ -313,7 +428,39 @@ section {
 .section-span {
     font-size: x-large;
     font-weight: 400;
-    width: 60vw;
+    width: 50vw;
+}
+
+.section-span h2 {
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+
+.back-sec {
+    background-color: var(--secondary);
+    padding: var(--corner-radius);
+    border-radius: var(--corner-radius);
+}
+
+.back-ac {
+    background-color: var(--accent-2);
+    padding: var(--corner-radius);
+    border-radius: var(--corner-radius);
+    color: var(--secondary);
+    font-size: large;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+#warning-calc {
+    max-width: 30vw;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .section-content {
@@ -323,6 +470,169 @@ section {
     justify-content: flex-start;
 }
 
+.section-row .section-text {
+    padding: 0;
+    height: auto;
+    align-content: flex-start;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.section-row .section-content {
+    width: 20vw;
+}
+
+/* CAROUSEL ----------------------------------------------------------- */
+
+
+#carousel-button .btn{
+    width: 460px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    height: auto;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.card-carousel {
+    --card-width: 80%;
+    --card-max-width: 460px;
+    --card-min-height: 450px;
+    --carousel-min-width: 600px;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: var(--card-min-height);
+    min-width: var(--carousel-min-width);
+    transition: filter .3s ease;
+}
+
+.card-carousel.smooth-return {
+    transition: all .2s ease;
+}
+
+.card-carousel .card {
+    background: var(--secondary);
+    width: var(--card-width);
+    max-width: var(--card-max-width);
+    text-align: center;
+    padding: 1em;
+    min-width: 250px;
+    min-height: var(--card-min-height);
+    position: absolute;
+    margin: 0 auto;
+    color: var(--display);
+    transition: inherit;
+    -webkit-box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.3);
+    border-radius: var(--corner-radius);
+    filter: brightness(.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.card p {
+    font-size: large;
+    font-weight: 400;
+    text-align: left;
+    color: var(--display);
+}
+
+.card.highlight {
+    filter: brightness(1);
+}
+
+.image-container {
+    position: relative;
+}
+
+.over-carousel-container {
+    display: none;
+}
+
+/* FLOATING CARD --------------------------------------------------- */
+
+.card_body {
+}
+.active .floating:before {
+    opacity: 1;
+    transition: 500ms;
+}
+
+.floating {
+    position: relative;
+    box-shadow: -20px 14px 54px rgba(0, 0, 0, 0.55);
+    border-radius: var(--corner-radius);
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+    transform: rotateX(17deg) rotateY(18deg);
+}
+
+.floating-no {
+    position: relative;
+    transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+    transform: rotateX(17deg) rotateY(18deg);
+}
+
+.text-on-floating {
+    z-index: 2;
+    font-size: xx-large;
+    font-weight: 600;
+    transform: translateZ(40px);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    text-shadow: -9px 8.7px 6px rgba(0, 0, 0, 0.8);
+}
+
+.container-on-floating {
+    z-index: 3;
+    transform: translateZ(30px);
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(-6.4px 6.2px 8px rgba(0, 0, 0, 0.6));
+}
+
+.phone-image {
+    width: calc(404px * 0.6);
+    height: calc(852px * 0.6);
+    transform: rotateZ(20deg);
+}
+
+.thickness-phone {
+    width: calc(400px * 0.6);
+    height: calc(852px * 0.6);
+    padding-right: 2px;
+    border-radius: 38px;
+
+}
+
+.thickness {
+    position: absolute;
+    background: linear-gradient(145deg, #252525, #444444);
+    background: #1a1a1a;
+    transform: translateZ(-2px) rotateZ(20deg);
+}
+.thickness:nth-child(2) {
+    transform: translateZ(-4px) rotateZ(20deg);
+}
+.thickness:nth-child(3) {
+    transform: translateZ(-6px) rotateZ(20deg);
+}
+.thickness:nth-child(4) {
+    transform: translateZ(-10px) rotateZ(20deg);
+}
 
 /* FOOTER ---------------------------------------------------------- */
 footer {
@@ -339,6 +649,9 @@ footer {
 
 /* FOR MOBILE ---------------------------------------------------- */
 @media screen and (max-width: 660px) {
+    :root {
+        --corner-radius: var(--corner-radius-small);
+    }
 
     .navbar {
         height: fit-content;
@@ -412,9 +725,8 @@ footer {
         width: auto;
     }
 
-    .header_image {
-        background-image: url("../assets/images/website/phone_header_mobile.png");
-        background-position: bottom;
+    .phone-header-image {
+        display: unset;
     }
 
     .container-nav .headline_title {
@@ -452,15 +764,24 @@ footer {
     section {
         padding: 0 0 30px 0;
     }
+
+    .section-row {
+        padding: 0 0 30px 0;
+    }
+
     .section-text {
+        padding: 0 20px;
+    }
+
+    .section-row .section-text {
         padding: 0 20px;
     }
 
     .section-title {
         padding: 15px 15px;
-        background-color: var(--primary);
-        border-radius: var(--corner-radius-small);
-        color: var(--secondary);
+        /*background-color: var(--primary);*/
+        /*border-radius: var(--corner-radius-small);*/
+        /*color: var(--secondary);*/
         font-size: xx-large;
         text-align: center;
     }
@@ -468,6 +789,88 @@ footer {
     .section-span {
         font-size: medium;
         width: auto;
+    }
+
+    .card-carousel {
+        --card-width: 80vw;
+        --card-min-height: 350px;
+        --carousel-min-width: 100vw;
+    }
+
+    #carousel-button .btn{
+        width: 80vw;
+    }
+
+    .carousel-container {
+        gap: 20px;
+        padding: 10px 0;
+    }
+
+    .over-carousel-container {
+        z-index: 3;
+        position: absolute;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        padding: 0 10px;
+    }
+
+    .desktop-header-image {
+        display: none;
+    }
+
+    #features_list {
+        display: none;
+    }
+
+    #content-calc-section {
+        display: none;
+    }
+
+    #calc-button {
+        border-radius: 999px;
+        padding: 15px;
+    }
+
+    #calc-button svg {
+        aspect-ratio: 1;
+        width: 50px;
+    }
+
+    #warning-calc {
+        max-width: unset;
+        font-size: xx-small;
+    }
+
+    .section-even {
+        background: var(--background-dark);
+        --background: var(--background-dark);
+        --display: var(--display-dark);
+        --primary: var(--primary-dark);
+        --secondary: var(--secondary-dark);
+        --accent: var(--accent-dark);
+        --accent-2: var(--accent-2-dark);
+
+        --button-bg-hover: var(--display-dark);
+        --button-fg-hover: var(--primary-dark);
+        --button-bg: var(--primary-dark);
+        --button-fg: var(--display-dark);
+
+        color: var(--display-dark)
+    }
+}
+
+@media only screen and (max-device-width: 1366px) {
+    .parallax {
+        background-attachment: scroll;
     }
 }
 
