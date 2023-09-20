@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* Reset and base styles  */
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Links */
+
+a, a:link, a:visited  {
+    text-decoration: none;
+}
+
+a:hover  {
+    text-decoration: none;
+}
+
+/* Common */
+
+aside, nav, footer, header, section, main {
+    display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+ul, ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+img, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+address {
+    font-style: normal;
+}
+
+/* Form */
+
+input, textarea, button, select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+
+input::-ms-clear {
+    display: none;
+}
+
+button, input[type="submit"] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+
+input:focus, input:active,
+button:focus, button:active {
+    outline: none;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+label {
+    cursor: pointer;
+}
+
+legend {
+    display: block;
+}
+
+a, button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+* {
+    background-repeat: no-repeat;
+}
+
+
+/* MAIN CSS ------------------------------------------------------- */
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #222;
+    overflow: hidden;
+}
+
+@keyframes anim-gradient {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    50% {
+        transform: translateY(50%) rotate(180deg) scale(2);
+    }
+    100% {
+        transform: translateY(100%) rotate(360deg) scale(1);
+    }
+}
+
+.gradient-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.gradient {
+    --size: 60vh;
+    --speed: 5s;
+    --easing: cubic-bezier(0.8, 0.2, 0.2, 0.8);
+
+    aspect-ratio: 1.3;
+    height: var(--size);
+    max-width: 100vw;
+    padding: 20px;
+    filter: blur(calc(var(--size) / 5));
+    background-image: radial-gradient(#4700be, #361b56, rgba(0, 0, 0, 0.36));
+    background-size: contain;
+    background-position: center;
+    animation: anim-gradient var(--speed) var(--easing) alternate infinite;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.gallery-column {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.gallery-column:nth-child(2n) {
+    margin-bottom: 120px;
+    flex-direction: column-reverse;
+}
+
+.gallery-column img {
+    width: 120px;
+    border-radius: 12px;
+}
+
+.main-container {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    align-items: center;
+}
+
+.main-container h1 {
+    color: #e7e7e7;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.main-container .btn {
+    width: 350px;
+    height: 80px;
+    border-radius: 999px;
+    background-color: #e7e7e7;
+
+    color: #1f1f1f;
+    font-size: large;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease-out;
+}
+
+@media (hover: none) {
+    .main-container .btn:active {
+        color:  #8524ff;
+        transform: scale(.95);
+        transition: all 50ms ease-in;
+    }
+}
+
+@media (hover: hover) {
+    .main-container .btn:hover {
+        box-shadow: 0 2px 10px 10px rgba(33, 7, 190, 0.3);
+        color: #8524ff;
+        transition: all 0.2s ease-in;
+
+        transform: scale(1.05);
+    }
+
+    .main-container .btn:active {
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+        transition: all 0.1s ease-out;
+        transform: scale(1);
+
+    }
+}
+
+.main-container .link {
+    margin-top: 20px;
+    color: #e7e7e7;
+    font-size: medium;
+}
+
+/* FOR MOBILE */
+@media screen and (max-width: 70rem) {
+    .gradient {
+        --size: 50vh;
+    }
+
+    .gradient-container {
+        padding: 0;
+    }
+
+    .main-container {
+        display: flex;
+        height: 95vh;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 0;
+        gap: 0;
+    }
+
+    .main-container h1 {
+        font-size: 50px;
+    }
+
+    .main-container .link {
+        font-size: 40px;
+    }
+
+    .main-container .btn {
+        width: 80vw;
+        height: 200px;
+        border-radius: 999px;
+        background-color: #e7e7e7;
+
+        color: #1f1f1f;
+        font-size: 60px;
+
+        transition: all 0.2s ease-out;
+    }
+}
+

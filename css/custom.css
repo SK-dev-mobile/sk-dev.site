@@ -8,6 +8,7 @@
     --display: #1D1D1D;
     --primary: #005DFF;
     --secondary: #FCFCFC;
+    --display-variant: #343434;
     --accent: #FFDA16;
     --accent-2: #F5583B;
 
@@ -19,6 +20,7 @@
 
     --background-dark: #0a0a0a;
     --display-dark: #eeeeee;
+    --display-variant-dark: #3d3d3d;
     --primary-dark: #1482ff;
     --secondary-dark: #1a1a1a;
     --accent-dark: #ffde5c;
@@ -55,6 +57,7 @@ body {
     background: var(--background-dark);
     --background: var(--background-dark);
     --display: var(--display-dark);
+    --display-variant: var(--display-variant-dark);
     --primary: var(--primary-dark);
     --secondary: var(--secondary-dark);
     --accent: var(--accent-dark);
@@ -231,6 +234,11 @@ body {
 .btn-small {
     padding: var(--corner-radius-small) calc(var(--corner-radius-small) + 5px);
     border-radius: var(--corner-radius-small);
+}
+
+.text-highlight {
+    color: var(--accent);
+    font-weight: 600;
 }
 
 
@@ -522,6 +530,20 @@ section {
     font-weight: 600;
 }
 
+.section-title-dub {
+    color: var(--display-variant);
+    font-size: 3em;
+    font-weight: 400;
+}
+
+.section-title-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
 .section-span {
     font-size: x-large;
     font-weight: 400;
@@ -784,17 +806,161 @@ section {
 }
 
 /* FOOTER ---------------------------------------------------------- */
+
 footer {
     display: flex;
     height: 60px;
     justify-content: space-around;
     align-content: center;
     align-items: center;
-    background-color: var(--display);
-    color: var(--secondary);
+    background-color: var(--secondary);
+    color: var(--display);
 }
 
 
+/* WATCH BUTTON -------------------------------------------------- */
+
+#watch-button {
+    height: 100%;
+    resize: both;
+    background-image: url("../assets/images/website/watch.png");
+    background-size: contain;
+    background-position: center;
+    transition: transform .2s ease-in-out;
+}
+
+#watch-button:hover {
+    transition: transform .2s ease-in-out;
+    transform: scale(1.1);
+}
+
+#watch-button .overlay-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    height: 100%;
+    padding: 20px 70px;
+    z-index: 2;
+}
+
+#watch-button h1 {
+    text-align: center;
+    font-size: medium;
+    font-weight: 400;
+}
+
+#watch-button .btn {
+    padding: 10px 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+    background: rgba(38, 38, 38, 0.05);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1px);
+    backdrop-filter: brightness(.9);
+    -webkit-backdrop-filter: blur(9.9px);
+    border: 1px solid rgba(255, 255, 255, 0.64);
+}
+
+
+/* KEYBOARD BUTTON --------------------------------------------- */
+
+.keyboard-button {
+    height: 100px;
+    width: 110px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    border: 0;
+    transition: all 0.25s cubic-bezier(0.2, 1, 0.2, 1);
+    color: #a7a7a7;
+    padding: 8px;
+    text-align: right;
+    box-shadow: 5px 10px 10px 0px #646464, 0px 10px 0px #a1a1a1, 0px 9px 0px #e0e0e0, 0px 8px 0px #e0e0e0, 0px 7px 0px #e0e0e0, 0px 6px 0px #e0e0e0, 0px 5px 0px #e0e0e0, 0px 4px 0px #e0e0e0, 0px 3px 0px #e0e0e0, 0px 2px 0px #e0e0e0, 0px 1px 0px #e0e0e0, 0px -1px 3px 0px #e0e0e0;
+    transform: translate3d(0, 0, 11px);
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.keyboard-button:hover, .keyboard-button:focus {
+    outline: none;
+    background-color: #fafafa;
+}
+.keyboard-button:active {
+    background-color: #fafafa;
+}
+.keyboard-button icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.keyboard-button svg {
+    enable-background: new 0 0 512 512;
+    height: 28px;
+    width: 28px
+}
+.keyboard-button svg path {
+    fill: var(--primary);
+}
+.keyboard-button:active {
+    box-shadow: 0 0 1px 1px #868686, 0 1px 0 #9d9d9d, 0 1px 0 #8d8d8d;
+    transform: translate3d(0, 11px, 0px);
+}
+.keyboard-button:active::after, .keyboard-button:active::before {
+    transform: translate3d(0, -11px, 0px);
+}
+.keyboard-button::after {
+    content: "";
+    height: 115px;
+    width: 124px;
+    position: absolute;
+    border: 4px solid var(--display-variant);
+    border-radius: 12px;
+    display: block;
+    top: 4px;
+    left: -7px;
+    transform: translate3d(0, 0, -11px);
+    transform-style: preserve-3d;
+    transition: all 0.25s cubic-bezier(0.2, 1, 0.2, 1);
+}
+
+.keyboard-button span {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    color: var(--display-variant);
+}
+
+.keyboard-container {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+}
+
+.under-keyboard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+#here-anim {
+    width: 128px;
+    height: 128px;
+}
 
 /* FOR MOBILE ---------------------------------------------------- */
 @media screen and (max-width: 660px) {
