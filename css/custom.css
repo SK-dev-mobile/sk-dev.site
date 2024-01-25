@@ -148,7 +148,6 @@ body {
     margin: 20px 10vw;
     background-color: var(--secondary);
     round-clip: var(--corner-radius);
-    height: calc(100vh - 140px - 200px);
 }
 
 /* BUTTON -------------------------------------------------------------- */
