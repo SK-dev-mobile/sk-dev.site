@@ -6,3 +6,9 @@
 /modules.xml
 /sk-dev.site.iml
 /vcs.xml
+# GitHub Copilot persisted chat sessions
+/copilot/chatSessions
+/misc.xml
+/inspectionProfiles/profiles_settings.xml
+/inspectionProfiles/Project_Default.xml
+/deployment.xml
